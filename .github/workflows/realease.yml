@@ -39,6 +39,6 @@ jobs:
       - name: Build the Docker image
         working-directory: ${{ github.workspace }}/wydocker
         run: |
-          docker buildx build --push --platform linux/amd64,linux/arm64,linux/arm/v7,linux/arm/v8 -t ${{ secrets.DOCKER_HUB_USER }}/pritunl:latest -t ${{ secrets.DOCKER_HUB_USER }}/pritunl:${{ github.event.inputs.version }} .
+          docker buildx build --push --platform linux/amd64,linux/arm64,linux/arm/v7,linux/arm/v8 -t ${{ env.DOCKER_HUB_USER }}/pritunl:latest -t ${{ env.DOCKER_HUB_USER }}/pritunl:${{ github.event.inputs.version }} .
         env:
           DOCKER_HUB_USER: ${{ secrets.DOCKER_HUB_USER }}
