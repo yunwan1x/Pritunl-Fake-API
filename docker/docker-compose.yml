@@ -8,11 +8,7 @@ services:
 
     pritunl:
         # Use the following to build the image from source (assuming you're running inside the repository).
-        build:
-            context: ../server
-            dockerfile: ../docker/Dockerfile
-            args:
-                - API_SERVER_DOMAIN=${API_SERVER_DOMAIN:-}
+        image: changhui/pritunl:v1.0 
         restart: always
         depends_on:
             - mongodb
@@ -25,7 +21,7 @@ services:
             - /etc/localtime:/etc/localtime:ro
         ports:
             # Under this port the Pritunl web interface will be exposed (for reverse proxies)
-            - 9700:9700
+            - 443:443
             # The following are the two default ports for the tcp+udp servers (you may edit these as needed!)
             - 1194:1194
             - 1194:1194/udp
@@ -33,4 +29,4 @@ services:
             - TZ=UTC
             - MONGODB_URI=mongodb://mongodb:27017/pritunl
             # Also enable reverse proxie capabilities
-            - REVERSE_PROXY=true
+            # - REVERSE_PROXY=true
